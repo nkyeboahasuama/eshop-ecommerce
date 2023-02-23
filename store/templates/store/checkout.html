@@ -1,0 +1,97 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div id="checkout">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="box-element">
+                    <form id="form" >
+                        <div class="row" id="user-info">
+                            <div class="col">
+                                <div class="form-field">
+                                    <label for="fullName">Full Name</label>
+                                    <input required class="form-control" type="text">
+                                </div>
+                            </div>
+                            
+                            <div class="col">
+                                <div class="form-field">
+                                    <label for="email">Email</label>
+                                    <input required class="form-control" type="email">
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <hr>
+
+                        <div class="row" id="shipping-info">
+
+                            <p class="form-text">Shipping Information.</p>
+                            <div class="col">
+                                <div class="form-field">
+                                    <label for="address">Mailing Address</label>
+                                    <input class="form-control" type="text" placeholder="Address">
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="form-field">
+                                    <label for="zipCode">Zip Code</label>
+                                    <input class="form-control" type="text" placeholder="Zip">
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="form-field">
+                                    <label for="city">City</label>
+                                    <input class="form-control" type="text" placeholder="City" name="city">
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="form-field">
+                                    <label for="state">State</label>
+                                    <input class="form-control" type="text" placeholder="State">
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <br>
+                        <br>
+                        
+                        <input style="width: 100%;" id="form-button" type="submit" class="btn btn-success" value="Continue Shopping">
+                    </form>
+                
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="box-element">
+                    <a class="btn btn-outline-dark" href="{% url 'cart' %}">&#8592; Back to Cart</a>
+                    <br>
+                    <hr>
+                    <h5>Order Summary</h5>
+                    
+                    <hr>
+                    {% for order_item in order_items %}
+                    <div class="row">
+                        <br>
+                        <br>
+                            <div style="flex: 2">{{order_item.product.name}}</div>
+                            <div style="flex: 2">${{order_item.product.price|floatformat:2}}</div>
+                            <div style="flex: 1">*{{order_item.quantity}}</div>
+                            
+                    </div>
+                    {% endfor %}
+                    <br>  
+                    <div style="flex: 2"><strong>Items: {{ order.get_item_total }}</strong></div>
+                    <div style="flex: 2"><strong>Total: ${{order.get_cart_total| floatformat:2}}</strong></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
