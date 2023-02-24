@@ -11,43 +11,32 @@ def categories(request):
     }
 
 
-
-def home(request):
-    products =  Product.objects.all()
+def main(request):
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer = customer)
+        order_items = OrderItem.objects.filter(order = order)
         cartItems = order.get_item_total       
     else:
         order_items = []
         order = {'get_item_total': 0}
 
-    context = {'products' : products,  'cartItems': cartItems}
+    context = {'cartItems': cartItems, 'order':order, 'order_items':order_items}
+    return (context)
+
+
+def home(request):
+    products =  Product.objects.all()
+    context = {'products' : products}
     return render(request, 'store/home.html', context)
 
 
 def cart(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer = customer)
-        order_items = OrderItem.objects.filter(order = order)
-        cartItems = order.get_item_total
-    else:
-        order_items = []
-    
-    context = {'order':order, 'order_items':order_items, 'cartItems': cartItems}
-    return render(request, 'store/cart.html', context)
+    return render(request, 'store/cart.html')
 
 
 def checkout(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_404(customer = customer)
-        order_items = OrderItem.objects.filter(order = order)
-        cartItems = order.get_item_total
-    
-    context = { 'order':order, 'order_items':order_items, 'cartItems':cartItems}
-    return render(request, 'store/checkout.html', context)
+    return render(request, 'store/checkout.html')
 
 
 def category_list(request, category_name):
@@ -76,5 +65,5 @@ def updateItem(request):
 
     if orderItem.quantity<= 0:
         orderItem.delete()
-
-    return JsonResponse('Item was added', safe=False)
+                                                                        
+    return JsonResponse('Item was added', safe=False)                               

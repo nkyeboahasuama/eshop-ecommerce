@@ -13,9 +13,7 @@ class Customer(models.Model):
         return self.name
 
 
-
 class Category(models.Model):
-    
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=100, blank=True, null=True)
 
@@ -25,12 +23,13 @@ class Category(models.Model):
     def get_absolute_url(self):
         return reverse('category_list', args=[self.name])
 
+
 class Product(models.Model):
     name = models.CharField(max_length=50)
     price = models.FloatField()
     in_stock = models.BooleanField(default=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
-
+    image = models.ImageField(upload_to='images/', default='images/lacoste.jfif')
 
     def __str__(self):
         return self.name
@@ -43,7 +42,6 @@ class Order(models.Model):
     def __str__(self):
         return str(self.id)
 
-
     @property
     def get_cart_total(self):
         orderitems = self.orderitem_set.all()
@@ -55,7 +53,6 @@ class Order(models.Model):
         orderitems = self.orderitem_set.all()
         total = sum([items.quantity for items in orderitems])
         return total
-
 
 
 class OrderItem(models.Model):
