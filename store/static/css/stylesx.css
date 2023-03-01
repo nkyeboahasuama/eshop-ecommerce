@@ -1,0 +1,16 @@
+.box-element {
+    box-shadow: hsl(0, 0%, 80%) 0 0 16px;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 10px;
+    text-align: left;
+}
+
+#chechout {
+    padding-top: 20px;
+}
+
+.img-size {
+    width: 100%;
+    height: 250px;
+}

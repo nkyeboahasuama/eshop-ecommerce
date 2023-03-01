@@ -1,0 +1,31 @@
+{% extends 'store/main.html' %}
+
+{% block content %}
+
+
+<div class="album py-5 ">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for product in products %}
+        <div class="col">
+          <div class="card shadow-sm">
+            <img class="img-fluid img-size" src="{{product.image.url}}" alt="rep"> 
+            <div class="card-body">
+              <p class="card-text">{{product.name}}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button data-product="{{product.id}}" data-action="add" type="button" class="btn btn-sm btn-outline-secondary update-cart">Add to Cart</button>
+                </div>
+                <small class="text-muted"><strong>${{product.price|floatformat:2}}</strong></small>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+</div>
+{% endblock %}
