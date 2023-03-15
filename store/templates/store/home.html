@@ -1,13 +1,16 @@
 {% extends 'store/main.html' %}
 
 {% block content %}
-
-
+  {% if user.is_authenticated %}
+  <h1 style="text-align: center;">Welcome, {{user.username}}</h1>
+  {% else %}
+  <h1 style="text-align: center;">Welcome, User</h1>
+  {% endif %}
 <div class="album py-5 ">
     <div class="container">
-
+      
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        {% for product in products %}
+        {% for product in products %} 
         <div class="col">
           <div class="card shadow-sm">
             <img class="img-fluid img-size" src="{{product.image.url}}" alt="rep"> 

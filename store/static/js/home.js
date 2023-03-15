@@ -39,4 +39,11 @@ function updateCartOrder(productId, action){
         console.log('data', data)
         location.reload()
     })
+<<<<<<< HEAD
 }
+=======
+}
+
+
+
+>>>>>>> cd7a5ddff68ff288e2cc7fa1f700f5a33b895e1a

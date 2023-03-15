@@ -9,6 +9,7 @@
                 <div class="box-element">
                     <form id="form" >
                         <div class="row" id="user-info">
+                            
                             <div class="col">
                                 <div class="form-field">
                                     <label for="fullName">Full Name</label>
@@ -62,9 +63,33 @@
                         <br>
                         <br>
                         
-                        <input style="width: 100%;" id="form-button" type="submit" class="btn btn-success" value="Continue Shopping">
+                        <button data-show="payment" style="width: 100%;" id="form-button"  class="btn btn-success">Continue Shopping</button>
                     </form>
                 
+                </div>
+                <br>
+                <div class="col-lg-12">
+                    <div class="box-element" id="payment">
+                        <h5> Payment Method </h5>
+                        <hr>
+                        <div class="row">
+                            <br>
+                            <br>
+                                <div style="flex: 2">
+                                    <select name="Payment" id="">
+                                        <option value="1">Debit Card</option>
+                                        <option value="1">Money Order</option>
+                                        <option value="1">Mobile Money</option>
+            
+                                    </select>
+                                    
+                                    
+                                </div>
+                        </div>
+                        <div class="row">
+                            <button class="btn btn-success">Make Payment</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -83,7 +108,6 @@
                             <div style="flex: 2">{{order_item.product.name}}</div>
                             <div style="flex: 2">${{order_item.product.price|floatformat:2}}</div>
                             <div style="flex: 1">*{{order_item.quantity}}</div>
-                            
                     </div>
                     {% endfor %}
                     <br>  
@@ -92,6 +116,26 @@
                 </div>
             </div>
         </div>
+        
+        
+        
     </div>
 </div>
+
+
+<script>
+    document.getElementById('payment').style.display = 'none';
+
+    function showPayment(show){
+        document.querySelector(`#${show}`).style.display = 'block';
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('button').forEach (button => {
+            button.onclick = function (){
+                showPayment(this.dataset.show);
+        }
+    })
+    })
+</script>
 {% endblock %}

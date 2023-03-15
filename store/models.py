@@ -4,18 +4,13 @@ from django.urls import reverse
 
 
 # Create your models here.
-class Customer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
-    name = models.CharField(max_length=50)
-    email = models.EmailField()
-
-    def __str__(self):
-        return self.name
 
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=100, blank=True, null=True)
+    class Meta:
+        verbose_name_plural = 'Categories'
 
     def __str__(self):
         return self.name
@@ -36,7 +31,7 @@ class Product(models.Model):
 
 
 class Order(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    user = models.ForeignKey(User,default=1, on_delete=models.CASCADE)
     transaction_id = models.CharField(max_length=20, null=False)
 
     def __str__(self):
