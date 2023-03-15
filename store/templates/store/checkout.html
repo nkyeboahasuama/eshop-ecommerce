@@ -9,6 +9,7 @@
                 <div class="box-element">
                     <form id="form" >
                         <div class="row" id="user-info">
+                            
                             <div class="col">
                                 <div class="form-field">
                                     <label for="fullName">Full Name</label>
@@ -74,9 +75,19 @@
                         <div class="row">
                             <br>
                             <br>
-                                <div style="flex: 2">Debit cart</div>
-                                <div style="flex: 2">Money order</div>
-                                <div style="flex: 1">Mobile money</div>
+                                <div style="flex: 2">
+                                    <select name="Payment" id="">
+                                        <option value="1">Debit Card</option>
+                                        <option value="1">Money Order</option>
+                                        <option value="1">Mobile Money</option>
+            
+                                    </select>
+                                    
+                                    
+                                </div>
+                        </div>
+                        <div class="row">
+                            <button class="btn btn-success">Make Payment</button>
                         </div>
                     </div>
                 </div>
@@ -113,7 +124,7 @@
 
 
 <script>
-    document.getElementById('payment').style.display = '#none';
+    document.getElementById('payment').style.display = 'none';
 
     function showPayment(show){
         document.querySelector(`#${show}`).style.display = 'block';

@@ -1,0 +1,31 @@
+{% extends 'store/main.html' %}
+
+{% block content %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<form method="POST">
+    {% csrf_token %}
+
+    <label>Username:</label>
+    <input type="text" name="username">
+
+    <label>Email:</label>
+    <input type="text" name="email">
+
+    <label>Password:</label>
+    <input type="password" name="password">
+
+    <label>Repeat Password:</label>
+    <input type="password" name="password2">
+
+    <input type="submit">
+</form>
+
+<h1>Register Now</h1>
+{% endblock %}
